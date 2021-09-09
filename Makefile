@@ -5,12 +5,14 @@ CFLAGS=-Wall
 LDFLAGS=-lm
 CC=gcc
 
+objects := $(patsubst %.c,%.o,$(wildcard *.c))
+
 all: $(PROYECTO)
 
 %.o: %.c
 	$(CC) -c $< $(CFLAGS)
 
-$(PROYECTO): muestreo.o archivos.o procesamiento.o
+$(PROYECTO): $(objects)
 	$(CC) $^ -o $@ $(LDFLAGS)
 
 .PHONY: clean
